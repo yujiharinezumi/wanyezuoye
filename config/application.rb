@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+
 module Wanye
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -21,6 +23,9 @@ module Wanye
        request_specs: false
        g.fixture_replacement :factory_bot, dir: "spec/factories"
       end
+
+      config.time_zone = 'Tokyo'
+      config.active_record.default_timezone = :local
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
