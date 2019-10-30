@@ -60,9 +60,9 @@ RSpec.feature "タスク管理機能", type: :feature do
     orders = all('div td')
      # binding.pry
      # nameのidで絞りたいので、0,2,4の順番で指定する。
-    expect(orders[0]).to have_content 'test_task_01'
+    expect(orders[0]).to have_content 'test_task_03'
     expect(orders[3]).to have_content 'test_task_02'
-    expect(orders[6]).to have_content 'test_task_03'
+    expect(orders[6]).to have_content 'test_task_01'
   end
 
   scenario "日時を入力する入力欄のテスト" do

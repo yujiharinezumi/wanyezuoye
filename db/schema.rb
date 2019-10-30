@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_054629) do
+ActiveRecord::Schema.define(version: 2019_10_30_045240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "Waiting"
+    t.string "Working"
+    t.string "Completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "task_id"
+    t.index ["task_id"], name: "index_statuses_on_task_id"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string "name", null: false
@@ -23,4 +33,5 @@ ActiveRecord::Schema.define(version: 2019_10_29_054629) do
     t.datetime "deadline", null: false
   end
 
+  add_foreign_key "statuses", "tasks"
 end

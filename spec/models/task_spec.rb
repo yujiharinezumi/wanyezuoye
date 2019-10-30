@@ -14,7 +14,7 @@ RSpec.describe Task, type: :model do
 
 
   it "deadlineが空ならバリデーションが通らない" do
-    task = Task.new(name: '失敗テスト', content: '失敗テスト',deadline:'')
+    task = Task.new(name: '失敗テスト', content: '失敗テスト', deadline:'')
     expect(task).not_to be_valid
   end
 

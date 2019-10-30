@@ -2,6 +2,18 @@
 
 <p><%= notice %></p>
 
+<%= form_with(model: Task.new ,local: true) do |form| %>
+  <%= form.label :name, '名前' %>
+  <%= form.text_field :name, value: (params[:tasks][:name] if params[:task]) %>
+ <%= form.label :status, 'ステータスを選んでください' %>
+  <select name="status">
+       <option value="Waiting" class="Waiting">未着手</option>
+       <option value="Working" class="Working">着手中</option>
+       <option value="Completed" class="Completed">完了</option>
+     </select>
+ <%= form.submit '検索する' %>
+<% end %>
+
 
 <table>
   <tr>
