@@ -26,3 +26,16 @@
 |  working     |  string     |
 |  completed   |  string     |
 |  task_id     |  integer    |
+
+
+## Description
+deploy to github
+* git add
++ git commit -m 'message'
+- git push origin master
+
+
+deploy to heroku
+* heroku create
++ heroku push origin master
+- heroku run rails db:migrate

@@ -205,3 +205,8 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  view:
+    sample: "さんぷるサンプル"
+    name: "名前"
+    details: "詳細"
+    deadline: "終了期限"

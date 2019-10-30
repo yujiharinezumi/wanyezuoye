@@ -6,10 +6,9 @@ RSpec.feature "タスク管理機能", type: :feature do
   background do
     # FactoryBot.create(:task)
     # FactoryBot.create(:second_task)
-    @task1 = Task.create!(name: 'test_task_01', content: 'testtesttest')
-    @task2 = Task.create!(name: 'test_task_02', content: 'samplesample')
-    @task3 = Task.create!(name: 'test_task_03', content: 'samplesample')
-
+    @task1 = Task.create!(name: 'test_task_01', content: 'testtesttest',deadline:"2019/10/28")
+    @task2 = Task.create!(name: 'test_task_02', content: 'samplesample',deadline:"2019/10/29")
+    @task3 = Task.create!(name: 'test_task_03', content: 'samplesample',deadline:"2019/10/30")
   end
 
   scenario "タスク一覧のテスト" do
@@ -61,8 +60,24 @@ RSpec.feature "タスク管理機能", type: :feature do
     orders = all('div td')
      # binding.pry
      # nameのidで絞りたいので、0,2,4の順番で指定する。
-    expect(orders[0]).to have_content 'test_task_03'
-    expect(orders[2]).to have_content 'test_task_02'
-    expect(orders[4]).to have_content 'test_task_01'
+    expect(orders[0]).to have_content 'test_task_01'
+    expect(orders[3]).to have_content 'test_task_02'
+    expect(orders[6]).to have_content 'test_task_03'
+  end
+
+  scenario "日時を入力する入力欄のテスト" do
+
+    visit new_task_path
+
+    fill_in "Name",with:"name"
+    fill_in "Content",with:"content"
+    fill_in "Deadline",with:"12"
+
+    click_button 'commit'
+
+
+    expect(page).to have_content "name"
+    expect(page).to have_content "content"
+    expect(page).to have_content "12"
   end
 end
