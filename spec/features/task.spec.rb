@@ -6,9 +6,9 @@ RSpec.feature "タスク管理機能", type: :feature do
   background do
     # FactoryBot.create(:task)
     # FactoryBot.create(:second_task)
-    @task1 = Task.create!(name: 'test_task_01', content: 'testtesttest',deadline:"2019/10/28")
-    @task2 = Task.create!(name: 'test_task_02', content: 'samplesample',deadline:"2019/10/29")
-    @task3 = Task.create!(name: 'test_task_03', content: 'samplesample',deadline:"2019/10/30")
+    @task1 = Task.create!(name: 'test_task_01', content: 'testtesttest',deadline:"2019/10/28",status: 0,priority: 0)
+    @task2 = Task.create!(name: 'test_task_02', content: 'samplesample',deadline:"2019/10/29",status: 0,priority: 0)
+    @task3 = Task.create!(name: 'test_task_03', content: 'samplesample',deadline:"2019/10/30",status: 0,priority: 0)
   end
 
   scenario "タスク一覧のテスト" do
@@ -49,11 +49,10 @@ RSpec.feature "タスク管理機能", type: :feature do
   #taskの詳細に戦死するように　visitに遷移するようにさせる
     visit task_path(@task1)
   #該当のタスクが表示されたページのデータが have_contentされているか期待するコードを記述する
-    expect(page).to have_content 'testtesttest'
+    expect(page).to have_content 'test_task_01'
   end
 
   scenario "タスクが作成日時の降順に並んでいるかのテスト" do
-
     #indexのビューに遷移する
     visit tasks_path
     #orders変数の中にname,contentを配列の中に入れる
@@ -61,8 +60,8 @@ RSpec.feature "タスク管理機能", type: :feature do
      # binding.pry
      # nameのidで絞りたいので、0,2,4の順番で指定する。
     expect(orders[0]).to have_content 'test_task_03'
-    expect(orders[3]).to have_content 'test_task_02'
-    expect(orders[6]).to have_content 'test_task_01'
+    expect(orders[5]).to have_content 'test_task_02'
+    expect(orders[10]).to have_content 'test_task_01'
   end
 
   scenario "日時を入力する入力欄のテスト" do
@@ -74,7 +73,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     fill_in "Deadline",with:"12"
 
     click_button 'commit'
-
 
     expect(page).to have_content "name"
     expect(page).to have_content "content"
