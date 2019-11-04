@@ -78,4 +78,18 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(page).to have_content "content"
     expect(page).to have_content "12"
   end
+
+  scenario "ステータスをソートするテスト" do
+
+    visit tasks_path
+
+    click_link 'ステータス'
+    
+
+
+
+    expect(page).to have_content
+
+  end
+
 end

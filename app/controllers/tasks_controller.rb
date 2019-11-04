@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
+      PER = 10
   before_action :set_task, only: [:show,:edit,:update,:destroy]
-    PER = 10
   def index
       if params[:name].present? && params[:status].present?
         @tasks = Task.where(name_serch(params[:task][:name]).status_serch(params[:task][:status]))

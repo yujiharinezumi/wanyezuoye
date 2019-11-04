@@ -231,6 +231,8 @@ ja:
     new_task: タスクを登録する
     back_task: タスク一覧に戻る
     edit_task: タスクを編集する
+    edit: 編集
+    destroy: 削除
 
   enums:
     task:

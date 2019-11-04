@@ -13,17 +13,20 @@
 
 <%= form.hidden_field :search, value: 'true' %>
 
- <%= form.submit t('view.search'),name:'search'%>
+ <%= form.submit t('view.search'),name:'search',class:"btn btn-info"%>
 <% end %>
 
 
-<table>
+<table class="table table-bordered table-hover">
   <tr>
     <th><%= t('view.name') %></th>
     <th><%= t('view.details') %></th>
     <th><%= t('view.deadline') %></th>
     <th><%= t('view.status') %></th>
     <th><%= t('view.priority') %></th>
+    <th><%= t('view.details') %></th>
+    <th><%= t('view.edit') %></th>
+    <th><%= t('view.destroy') %></th>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -45,6 +48,6 @@
 
 <%= paginate @tasks %>
 
-<%= link_to t('view.new_post'), new_task_path %>
-<%= link_to t('view.sort_deadline'), tasks_path(sort_deadline: "true") %>
-<%= link_to t('view.back_sort'), tasks_path %>
+<%= link_to t('view.new_post'),new_task_path,class:"btn btn-info" %>
+<%= link_to t('view.sort_deadline'), tasks_path(sort_deadline: "true"),class:"btn btn-info" %>
+<%= link_to t('view.back_sort'), tasks_path,class:"btn btn-info" %>
