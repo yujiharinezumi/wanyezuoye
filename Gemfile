@@ -77,6 +77,7 @@ group :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'webdrivers'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -87,3 +88,5 @@ gem 'enum_help'
 gem 'kaminari'
 
 gem 'kaminari-bootstrap', '~> 3.0.1'
+
+gem 'bcrypt', '3.1.11'
