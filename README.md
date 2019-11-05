@@ -6,9 +6,10 @@
 |  id        |  integer  |
 |  name      |  string   |
 | content    |  text     |
-| expiaration|  date     |
-|  priority  |  integer  |
-|  type      |  string   |
+| deadline   |  datetime |
+| status     |  integer  |
+| priority   |  integer  |
+
 |  user_id   |  text     |
 
 |   User           |                |
@@ -19,13 +20,6 @@
 |  password_digest |  string        |
 
 
-|   Status     |             |
-| ---------    | --------    |
-|  id          |  integer    |
-|  waiting     |  string     |
-|  working     |  string     |
-|  completed   |  string     |
-|  task_id     |  integer    |
 
 
 ## Description
