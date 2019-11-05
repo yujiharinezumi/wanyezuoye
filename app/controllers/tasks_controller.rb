@@ -1,20 +1,28 @@
 class TasksController < ApplicationController
-      PER = 10
+      PER = 5
   before_action :set_task, only: [:show,:edit,:update,:destroy]
   def index
-      if params[:name].present? && params[:status].present?
-        @tasks = Task.where(name_serch(params[:task][:name]).status_serch(params[:task][:status]))
-      elsif params[:name].present?
-        @tasks = Task.where(name_serch[:task][:name])
-      elsif params[:status].present?
-        @tasks = Task.where(status_serch[:task][:status])
+    # if params[:task]
+
+      if params[:task].present?
+        @tasks = Task.name_search(params[:task][:name]).status_search(params[:task][:status]).priority_search(params[:task][:priority]).page(params[:page]).per(PER)
+
       elsif params[:sort_deadline]
-        @tasks = Task.all.order(deadline: "DESC")
+        @tasks = Task.all.order(deadline: "ASC").page(params[:page]).per(PER)
+
       else
-        @tasks = Task.all.order(created_at: "DESC")
+        @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(PER)
+
       end
-       @tasks = Task.page(params[:page]).per(PER)
+
     end
+   #  if params[:task].present?
+   #   @tasks = @tasks.search_with_title(params[:task][:title])
+   #   if params[:task][:status].present?
+   #     @tasks = @tasks.search_with_status(params[:task][:status])
+   #   end
+   # end
+
 
   def new
     @task = Task.new
@@ -50,6 +58,12 @@ class TasksController < ApplicationController
     flash[:notice] = 'タスクの削除しました'
     redirect_to tasks_path
   end
+
+  # def search
+  #   @tasks = Task.search(params[:q])
+  #   @products = @products.page(params[:page])
+  #   render "index"
+  # end
 
   private
 

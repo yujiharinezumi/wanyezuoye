@@ -6,7 +6,7 @@
   <%= form.label :name_search, t('view.search_name') %>
   <%= form.text_field :name %>
  <%= form.label :status_serch, t('view.select_status') %>
- <%= form.select :status, Task.statuses_i18n.invert%>
+ <%= form.select :status, Task.statuses_i18n.invert %>
 
 <%= form.label :status_serch,t('view.select_priority') %>
 <%= form.select :priority, Task.priorities_i18n.invert%>
@@ -35,7 +35,7 @@
     <div classs="task">
       <td id="name"><%= task.name %></td>
       <td id="content"><%= task.content %></td>
-      <td id="deadline"><%= task.deadline %></td>
+      <td id="deadline"><%= task.deadline.strftime('%Y-%m-%d') %></td>
       <td id="status"><%= Task.statuses_i18n[task.status] %></td>
       <td id="priority"><%= Task.priorities_i18n[task.priority] %></td>
    </div>
@@ -46,8 +46,8 @@
 <% end %>
 </table>
 
-<%= paginate @tasks %>
+ <%= paginate @tasks %>
 
 <%= link_to t('view.new_post'),new_task_path,class:"btn btn-info" %>
-<%= link_to t('view.sort_deadline'), tasks_path(sort_deadline: "true"),class:"btn btn-info" %>
+<%= link_to t('view.sort_deadline'), tasks_path(sort_deadline: "true"),class:"btn btn-info",id:"sort_deadline01" %>
 <%= link_to t('view.back_sort'), tasks_path,class:"btn btn-info" %>
