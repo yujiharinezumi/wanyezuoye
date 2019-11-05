@@ -231,6 +231,14 @@ ja:
     new_task: タスクを登録する
     back_task: タスク一覧に戻る
     edit_task: タスクを編集する
+    edit: 編集
+    destroy: 削除
+    pagination:
+    first: "&laquo; 最初"
+    last: "最後 &raquo;"
+    next: "次 &rsaquo;"
+    previous: "&lsaquo; 前"
+    truncate: "&hellip;"
 
   enums:
     task:

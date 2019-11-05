@@ -32,7 +32,7 @@
     <%= form.select :priority, Task.priorities_i18n.invert, {include_blank: t('view.priority')} %>
   </div>
 
-  <%= form.submit %>
+  <%= form.submit class:"btn btn-info" %>
 <% end %>
-
-<%= link_to t('view.back_task'), tasks_path %>
+<p></p>
+<%= link_to t('view.back_task'), tasks_path,class:"btn btn-info" %>
