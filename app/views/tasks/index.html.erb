@@ -1,13 +1,32 @@
-<h1>ブログ一覧</h1>
+<h1><%= t('view.index') %></h1>
 
 <p><%= notice %></p>
 
+<%= form_with(model: Task.new,method: :get,local: true,url: tasks_path) do |form| %>
+  <%= form.label :name_search, t('view.search_name') %>
+  <%= form.text_field :name %>
+ <%= form.label :status_serch, t('view.select_status') %>
+ <%= form.select :status, Task.statuses_i18n.invert %>
 
-<table>
+<%= form.label :status_serch,t('view.select_priority') %>
+<%= form.select :priority, Task.priorities_i18n.invert%>
+
+<%= form.hidden_field :search, value: 'true' %>
+
+ <%= form.submit t('view.search'),name:'search',class:"btn btn-info"%>
+<% end %>
+
+
+<table class="table table-bordered table-hover">
   <tr>
     <th><%= t('view.name') %></th>
     <th><%= t('view.details') %></th>
     <th><%= t('view.deadline') %></th>
+    <th><%= t('view.status') %></th>
+    <th><%= t('view.priority') %></th>
+    <th><%= t('view.details') %></th>
+    <th><%= t('view.edit') %></th>
+    <th><%= t('view.destroy') %></th>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -16,21 +35,19 @@
     <div classs="task">
       <td id="name"><%= task.name %></td>
       <td id="content"><%= task.content %></td>
-      <td id="deadline"><%= task.deadline %></td>
-
-    </div>
-    <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
-    <td><%= link_to 'タスクを編集する', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
-    <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
+      <td id="deadline"><%= task.deadline.strftime('%Y-%m-%d') %></td>
+      <td id="status"><%= Task.statuses_i18n[task.status] %></td>
+      <td id="priority"><%= Task.priorities_i18n[task.priority] %></td>
+   </div>
+    <td><%= link_to t('view.check_details'), task_path(task.id) %></td>
+    <td><%= link_to t('view.edit_task'), edit_task_path(task.id), data: { confirm: t('view.edit_task?') } %></td>
+    <td><%= link_to t('view.delete_task'), task_path(task.id), method: :delete, data: { confirm: t('view.delete_task?') } %></td>
   </tr>
-
-
-
 <% end %>
 </table>
 
-<%= link_to '新しくタスクを投稿する', new_task_path %>
+ <%= paginate @tasks %>
 
-  <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
-
-  <%= link_to "元に戻す", tasks_path %>
+<%= link_to t('view.new_post'),new_task_path,class:"btn btn-info" %>
+<%= link_to t('view.sort_deadline'), tasks_path(sort_deadline: "true"),class:"btn btn-info",id:"sort_deadline01" %>
+<%= link_to t('view.back_sort'), tasks_path,class:"btn btn-info" %>

@@ -1,12 +1,28 @@
 class TasksController < ApplicationController
+      PER = 5
   before_action :set_task, only: [:show,:edit,:update,:destroy]
   def index
-    if params[:sort_expired]
-      @tasks = Task.all.order(created_at: "DESC")
-    else
-      @tasks = Task.all
+    # if params[:task]
+
+      if params[:task].present?
+        @tasks = Task.name_search(params[:task][:name]).status_search(params[:task][:status]).priority_search(params[:task][:priority]).page(params[:page]).per(PER)
+
+      elsif params[:sort_deadline]
+        @tasks = Task.all.order(deadline: "ASC").page(params[:page]).per(PER)
+
+      else
+        @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(PER)
+
+      end
+
     end
-  end
+   #  if params[:task].present?
+   #   @tasks = @tasks.search_with_title(params[:task][:title])
+   #   if params[:task][:status].present?
+   #     @tasks = @tasks.search_with_status(params[:task][:status])
+   #   end
+   # end
+
 
   def new
     @task = Task.new
@@ -23,11 +39,9 @@ class TasksController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-
   end
 
   def update
@@ -45,10 +59,16 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+  # def search
+  #   @tasks = Task.search(params[:q])
+  #   @products = @products.page(params[:page])
+  #   render "index"
+  # end
+
   private
 
   def task_params
-    params.require(:task).permit(:name,:content,:deadline)
+    params.require(:task).permit(:name,:content,:deadline,:status,:priority)
   end
 
   def set_task
