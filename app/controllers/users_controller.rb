@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :login_user, only: [:new]
   before_action :set_user, only:[:show]
-  before_action :check_user
+  before_action :check_user,only:[:show]
 
 
   def new
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      log_in @user
       redirect_to user_path(@user.id)
     else
       render :new
@@ -32,8 +33,9 @@ class UsersController < ApplicationController
   end
 
   def login_user
-    logged_in?
-    redirect_to tasks_path
+    if logged_in?
+      redirect_to tasks_path
+    end
   end
 
   def check_user

@@ -81,16 +81,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(page).to have_content "12"
   end
 
-
-
-
-
-
-
-
-
-
-
   scenario "終了期限順に並べるテスト" do
 
     visit tasks_path
@@ -101,7 +91,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     orders = all('div td')
     tds = page.all('tr td')
    expect(tds[2]).to have_content '2019-10-28'
-
 
     # page.all('div td')[2].to have_content "2019/10/28"
 
@@ -122,7 +111,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     tds = page.all('tr td')
    expect(tds[2]).to have_content '2019-10-30'
     # expect(page).to have_text '*test_task_03*'
-
 
   end
 
