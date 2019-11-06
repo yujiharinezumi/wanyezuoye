@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-      PER = 5
+  PER = 5
   before_action :set_task, only: [:show,:edit,:update,:destroy]
   before_action :authenticate_user
   def index
@@ -18,6 +18,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
     if @task.save
       flash[:notice] = 'タスクの登録しました'
       redirect_to tasks_path
@@ -56,6 +57,4 @@ class TasksController < ApplicationController
   def set_task
     @task = Task.find(params[:id])
   end
-
-
 end

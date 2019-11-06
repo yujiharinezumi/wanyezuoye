@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :set_user, only:[:show]
   before_action :check_user,only:[:show]
 
-
   def new
     @user = User.new
   end
@@ -43,5 +42,4 @@ class UsersController < ApplicationController
         redirect_to tasks_path,notice:"権限がありません"
       end
   end
-
 end

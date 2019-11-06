@@ -1,19 +1,43 @@
 require 'rails_helper'
+require 'support/utilities'
 
 # このRSpec.featureの右側に、「タスク管理機能」のように、テスト項目の名称を書きます（do ~ endでグループ化されています）
 RSpec.feature "タスク管理機能", type: :feature do
   # scenario（itのalias）の中に、確認したい各項目のテストの処理を書きます。
-  background do
+  let(:user_first) { FactoryBot.create(:user_first)}
+  before do
+
+    @user = (:user_first)
+
+    # user_second = FactoryBot.create(:user_second)
+    # user_third = FactoryBot.create(:user_third)
+    visit new_session_path
+
+    fill_in "session_email",with: user.email
+
+    fill_in "session_password",with: user.password
+    # save_and_open_page
+    click_button 'commit'
+
+
+
+  end
+
+
     # FactoryBot.create(:task)
     # FactoryBot.create(:second_task)
-    @task1 = Task.create!(name: 'test_task_01', content: 'testtesttest',deadline:"2019/10/28",status: 0,priority: 0)
-    @task2 = Task.create!(name: 'test_task_02', content: 'samplesample',deadline:"2019/10/29",status: 2,priority: 0)
-    @task3 = Task.create!(name: 'test_task_03', content: 'samplesample',deadline:"2019/10/30",status: 2,priority: 2)
+  background do
+    FactoryBot.create(:task_first, user_id: user_first.id)
+    FactoryBot.create(:task_second, user_id: user_second.id )
+    FactoryBot.create(:task_third, user_id: user_third.id )
   end
 
   scenario "タスク一覧のテスト" do
+    # @user_0 = User.create(name: "sugasuga")
+    log_in @user
     # tasks_pathにvisitする（タスク一覧ページに遷移する）
     visit tasks_path
+save_and_open_page
     # visitした（到着した）expect(page)に（タスク一覧ページに）「testtesttest」「samplesample」という文字列が
     # have_contentされているか？（含まれているか？）ということをexpectする（確認・期待する）テストを書いている
     expect(page).to have_content 'testtesttest'
@@ -24,6 +48,7 @@ RSpec.feature "タスク管理機能", type: :feature do
   scenario "タスク作成のテスト" do
  # new_task_pathにvisitする（タスク登録ページに遷移する）
  # 1.ここにnew_task_pathにvisitする処理を書く
+   log_in @user_first
    visit new_task_path
 
    # save_and_open_page
@@ -47,6 +72,7 @@ RSpec.feature "タスク管理機能", type: :feature do
   scenario "タスク詳細のテスト" do
   #task1,2の変数を用意しTaskをインスタンス化します。
   #taskの詳細に戦死するように　visitに遷移するようにさせる
+    log_in @user1
     visit task_path(@task1)
   #該当のタスクが表示されたページのデータが have_contentされているか期待するコードを記述する
     expect(page).to have_content 'test_task_01'
@@ -54,6 +80,7 @@ RSpec.feature "タスク管理機能", type: :feature do
 
   scenario "タスクが作成日時の降順に並んでいるかのテスト" do
     #indexのビューに遷移する
+    log_in @user1
     visit tasks_path
 
 
@@ -67,7 +94,7 @@ RSpec.feature "タスク管理機能", type: :feature do
   end
 
   scenario "日時を入力する入力欄のテスト" do
-
+    log_in @user1
     visit new_task_path
 
     fill_in "task[name]",with:"name"
@@ -82,25 +109,23 @@ RSpec.feature "タスク管理機能", type: :feature do
   end
 
   scenario "終了期限順に並べるテスト" do
+    log_in @user1
 
     visit tasks_path
 
     click_link '終了期限でソートする'
     # save_and_open_page
 
+    log_in @user1
     orders = all('div td')
     tds = page.all('tr td')
    expect(tds[2]).to have_content '2019-10-28'
-
-    # page.all('div td')[2].to have_content "2019/10/28"
-
-    # expect(page).to have_content '2019/10/29'
-    # expect(page).to have_content '2019/10/28to
   end
 
 
   scenario "名前、ステータス、優先度で絞り込みするためのテスト" do
 
+    log_in @user1
     visit tasks_path
 
     fill_in 'task_name',with: "task"
