@@ -124,13 +124,9 @@ RSpec.feature "タスク管理機能", type: :feature do
 
   scenario "終了期限順に並べるテスト" do
     log_in @user_1
-
-
     visit tasks_path
-
     click_link '終了期限でソートする'
     # save_and_open_page
-
     log_in @user_1
     orders = all('div td')
     tds = page.all('tr td')
