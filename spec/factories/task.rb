@@ -8,29 +8,27 @@ FactoryBot.define do
     content { 'testtesttest' }
     deadline {'2019/10/28'}
     status {'waiting'}
-    priority {'medium'}
-    user_id {User.first.id}
+    priority {'low'}
+    # user {create(:user_first)}
 
   end
 
   factory :task_second,class: Task do
-    name { 'test_task_01' }
     name { 'test_task_02' }
     content { 'samplesample' }
     deadline {'2019/10/29'}
     status {'completed'}
     priority {'medium'}
-    user_id {User.second.id}
+    # user_id {2}
   end
 
   factory :task_third,class: Task do
-    name { 'test_task_01' }
     name { 'test_task_03' }
     content { 'samplesample' }
     deadline {'2019/10/30'}
     status {'waiting'}
-    priority {'medium'}
-    user_id {User.third.id}
+    priority {'heigh'}
+    # user_id {3}
   end
 
 

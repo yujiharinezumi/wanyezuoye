@@ -4,11 +4,11 @@ class TasksController < ApplicationController
   before_action :authenticate_user
   def index
       if params[:task].present?
-        @tasks = Task.name_search(params[:task][:name]).status_search(params[:task][:status]).priority_search(params[:task][:priority]).page(params[:page]).per(PER)
+        @tasks = current_user.tasks.name_search(params[:task][:name]).status_search(params[:task][:status]).priority_search(params[:task][:priority]).page(params[:page]).per(PER)
       elsif params[:sort_deadline]
-        @tasks = Task.all.order(deadline: "ASC").page(params[:page]).per(PER)
+        @tasks = current_user.tasks.order(deadline: "ASC").page(params[:page]).per(PER)
       else
-        @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(PER)
+        @tasks = current_user.tasks.order(created_at: "DESC").page(params[:page]).per(PER)
       end
     end
 
