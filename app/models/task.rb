@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  belongs_to :user, dependent: :destroy
+
   validates :name, presence: true
   validates :content,presence: true
   validates :deadline,presence: true
@@ -10,6 +12,7 @@ class Task < ApplicationRecord
   scope :status_search, -> (status) {where(status: status)}
   scope :priority_search, -> (priority) {where(priority: priority)}
 
+  # admin < 1
 
   paginates_per 5
 end

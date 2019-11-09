@@ -22,4 +22,8 @@ RSpec.describe Task, type: :model do
     task = Task.new(name: '', content: '',deadline:'')
     expect(task).not_to be_valid
   end
+  
+
+
+
 end

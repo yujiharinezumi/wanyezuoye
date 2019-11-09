@@ -1,0 +1,7 @@
+<h1><%= @user.name %><%= t('view.user_page') %></h1>
+
+<p><%= t('view.email') %>: <%= @user.email %></p>
+
+<p><%= t('view.admin') %>:<%= @user.admin %> </p>
+
+<%= link_to t('view.back_user'), admin_users_path %>
