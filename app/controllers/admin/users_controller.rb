@@ -22,6 +22,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
+
   end
 
   def edit
@@ -47,7 +48,7 @@ class Admin::UsersController < ApplicationController
       flash[:notice] = "ユーザーを削除できません"
     end
   end
-  
+
   private
 
   def user_params
@@ -61,9 +62,4 @@ class Admin::UsersController < ApplicationController
   def authenticate_admin
     redirect_to root_url unless current_user.admin?
   end
-  # def authenticate_user
-  #   if current_user == nil
-  #     redirect_to new_session_path
-  #   end
-  # end
 end
