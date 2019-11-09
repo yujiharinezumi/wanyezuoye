@@ -9,7 +9,6 @@ RSpec.feature "タスク管理機能", type: :feature do
   #   @user = FactoryBot.create(:user)
   #
   #   @user = (:user_first)
-
     # user_second = FactoryBot.create(:user_second)
     # user_third = FactoryBot.create(:user_third)
     # visit new_session_path
@@ -20,11 +19,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     # # save_and_open_page
     # click_button 'commit'
 
-
-
   # end
-
-
     # FactoryBot.create(:task)
     # FactoryBot.create(:second_task)
   background do
@@ -101,22 +96,18 @@ RSpec.feature "タスク管理機能", type: :feature do
     # expect(orders[]).to have_content 'test_task_03'
     # expect(orders).to have_content 'test_task_02'
     # expect(orders[]).to have_content 'test_task_01'
-
-    # save_and_open_page
-    sleep(3)
-    expect(page).to have_text /.*test_task_03.*test_task_01.*/
+    # sleep(3)
+    expect(page).to have_text /.*test_task_03.*\n.*\ntest_task_01.*/
+    # expect(page).to have_text /.*未着手.*高.*/
   end
 
   scenario "日時を入力する入力欄のテスト" do
     log_in @user_1
     visit new_task_path
-
     fill_in "task[name]",with:"name"
     fill_in "task[content]",with:"content"
     fill_in "task[deadline]",with:"12"
-
     click_button 'commit'
-
     expect(page).to have_content "name"
     expect(page).to have_content "content"
     expect(page).to have_content "12"
@@ -127,27 +118,16 @@ RSpec.feature "タスク管理機能", type: :feature do
     visit tasks_path
     click_link '終了期限でソートする'
     # save_and_open_page
-    log_in @user_1
-    orders = all('div td')
-    tds = page.all('tr td')
-   expect(tds[2]).to have_content '2019-10-28'
+      expect(page).to have_text /.*2019-10-28.*\n.*\n.*2019-10-30.*/
   end
-
 
   scenario "名前、ステータス、優先度で絞り込みするためのテスト" do
-
     log_in @user_1
     visit tasks_path
-
     fill_in 'task_name',with: "task"
-    select "完了", from: 'task_status'
+    select "未着手", from: 'task_status'
     select "高", from: 'task_priority'
     click_on 'search'
-
-    tds = page.all('tr td')
-   expect(tds[2]).to have_content '2019-10-30'
-    # expect(page).to have_text '*test_task_03*'
-
+    expect(page).to have_text /.*未着手.*低.*/
   end
-
 end

@@ -208,6 +208,9 @@ ja:
   view:
     sample: "さんぷるサンプル"
     name: "名前"
+    email: メールアドレス
+    task_count: タスクの数
+    check_admin: アドミンの有無
     details: "詳細"
     deadline: "終了期限"
     status: "ステータス"
@@ -234,13 +237,19 @@ ja:
     edit: 編集
     destroy: 削除
     authenticate: 権限がありません
-  pagination:
-    first: "&laquo; 最初"
-    last: "最後 &raquo;"
-    next: "次 &rsaquo;"
-    previous: "&lsaquo; 前"
-    truncate: "&hellip;"
-
+    user_index: ユーザー一覧
+    edit_user: ユーザーの編集
+    create_user: ユーザーの作成
+    user_detail: ユーザーの詳細
+    user_edit: ユーザーの編集
+    user_destroy: ユーザーの削除
+    profile: プロフィール
+    login: ログイン
+    logout: ログアウト
+    signup: サインアップ
+    user_page: のページ
+    admin: アドミン
+    back_user: ユーザー一覧に戻る
   enums:
     task:
       status:
@@ -251,7 +260,10 @@ ja:
         low: 低
         medium: 中
         heigh: 高
-  option:
-    edit: 編集
-    delete: 削除
-    details: 詳細
+  views:
+      pagination:
+        first: '最初'
+        last: '最後'
+        previous: '前'
+        next: '次'
+        truncate: '...'

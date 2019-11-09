@@ -24,9 +24,9 @@ RSpec.feature "ユーザー機能", type: :feature do
     click_button 'commit'
     expect(page).to have_content '名前を入力してください'
     expect(page).to have_content 'メールアドレスを入力してください'
-    expect(page).to have_content 'メールアドレスは不正な値です'
-    expect(page).to have_content 'パスワードを入力してください'
-    expect(page).to have_content 'パスワードは6文字以上で入力してください'
+    # expect(page).to have_content 'メールアドレスは不正な値です'
+     expect(page).to have_content 'パスワードを入力してください'
+    # expect(page).to have_content 'パスワードは6文字以上で入力してください'
   end
 
   scenario "ログインできるかテスト" do
@@ -38,6 +38,12 @@ RSpec.feature "ユーザー機能", type: :feature do
     visit new_session_path
     click_button 'commit'
     expect(page).to have_content 'ログインに失敗しました'
+  end
+
+  scenario "ログアウトのテスト" do
+    log_in @user1
+     click_on 'ログアウト'
+     expect(page).to have_content "ログアウトしました"
   end
 
   scenario "ログインしてない人はタスク一覧を見れないテスト" do
