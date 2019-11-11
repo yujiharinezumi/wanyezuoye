@@ -3,18 +3,14 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show,:edit,:update,:destroy]
   def index
     # if params[:task]
-
       if params[:task].present?
         @tasks = Task.name_search(params[:task][:name]).status_search(params[:task][:status]).priority_search(params[:task][:priority]).page(params[:page]).per(PER)
-
       elsif params[:sort_deadline]
         @tasks = Task.all.order(deadline: "ASC").page(params[:page]).per(PER)
-
       else
         @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(PER)
-
       end
-
+        @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] }) if params[:label_id].present?
     end
    #  if params[:task].present?
    #   @tasks = @tasks.search_with_title(params[:task][:title])
@@ -68,7 +64,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name,:content,:deadline,:status,:priority)
+    params.require(:task).permit(:name,:content,:deadline,:status,:priority,{ label_ids: []})
   end
 
   def set_task
