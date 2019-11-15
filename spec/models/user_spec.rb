@@ -18,10 +18,10 @@ RSpec.describe User, type: :model do
       user = User.new(name: 'a', email: 'a',password:"aaaaaa",password_confirmation:"aaaaaa")
       expect(user).not_to be_valid
     end
-    #
+
     it "同じemailが登録されているならバリデーションが通らない" do
       user1 = User.new(name: 'a', email: 'a@gmail.com',password:"aaaaaa",password_confirmation:"aaaaaa")
-      user2 = User.new(name: 'b', email: 'a@gmail.com',password:"aaaaaa",password_confirmation:"aaaaaa")
+      user2 = User.new(name: 'b', email: 'a@gmail.com',password:"bbbbbb",password_confirmation:"bbbbbb")
       expect(user2).not_to be_valid
     end
 
@@ -31,7 +31,7 @@ RSpec.describe User, type: :model do
     end
 
     it "passwordが6文字以内ならバリデーションが通らない" do
-      user = User.new(name: 'a', email: 'a@gmmail.com',password:"aa",password_confirmation:"aa")
+      user = User.new(name: 'a', email: 'a@gmmail.com',password:"1",password_confirmation:"1")
       expect(user).not_to be_valid
     end
 
