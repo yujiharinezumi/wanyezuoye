@@ -10,7 +10,6 @@
 
   <%= form.label :priority_search,t('view.select_priority') %>
   <%= form.select :priority, Task.priorities_i18n.invert,:include_blank => true %>
-
 <br>
     <% Label.all.each do |label|%>
      <div class="label_search">
@@ -23,7 +22,6 @@
 
   <%= form.submit t('view.search'),name:'search',class:"btn btn-info"%>
 <% end %>
-
 
 <table class="table table-bordered table-hover">
   <tr>
