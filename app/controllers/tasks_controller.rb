@@ -7,14 +7,13 @@ class TasksController < ApplicationController
                           .status_search(params.dig(:task, :status))
                           .priority_search(params.dig(:task, :priority))
                           .label_search(params.dig(:task, :labels_ids))
-                          .page(params[:page]).per(PER)
+                          .order(created_at: "DESC").page(params[:page]).per(PER)
+
       if  params[:sort_deadline]
-         @tasks = current_user.tasks.order(deadline: "ASC").page(params[:page]).per(PER)
-      elsif params[:sort_priority]
-        @tasks = current_user.tasks.order(priority: "DESC").page(params[:page]).per(PER)
-      else
-        @tasks = current_user.tasks.order(created_at: "DESC").page(params[:page]).per(PER)
-      end
+          @tasks = current_user.tasks.order(deadline: "ASC").page(params[:page]).per(PER)
+       elsif params[:sort_priority]
+         @tasks = current_user.tasks.order(priority: "DESC").page(params[:page]).per(PER)
+       end
     end
 
   def new
