@@ -5,3 +5,25 @@
 <p><%= t('view.admin') %>:<%= @user.admin %> </p>
 
 <%= link_to t('view.back_user'), admin_users_path %>
+
+<table class="table table-bordered table-hover">
+  <tr>
+    <th><%= t('view.name') %></th>
+    <th><%= t('view.details') %></th>
+    <th><%= t('view.deadline') %></th>
+    <th><%= t('view.status') %></th>
+    <th><%= t('view.priority') %></th>
+  </tr>
+
+<% @user.tasks.each do |task| %>
+  <tr>
+    <div classs="task">
+      <td id="name"><%= task.name %></td>
+      <td id="content"><%= task.content %></td>
+      <td id="deadline"><%= task.deadline.strftime('%Y-%m-%d') %></td>
+      <td id="status"><%= Task.statuses_i18n[task.status] %></td>
+      <td id="priority"><%= Task.priorities_i18n[task.priority] %></td>
+   </div>
+  </tr>
+<% end %>
+</table>

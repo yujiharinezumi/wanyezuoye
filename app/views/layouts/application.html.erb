@@ -12,23 +12,34 @@
 
 
   <body>
+    <header>
+      <div class="header">
+        <nav>
+          <ul class="top_menu clearfix">
+              <% if logged_in? %>
+            <li><%= link_to t('view.profile'), user_path(current_user.id) %></li>
+            <li><%= link_to t('view.logout'), session_path(current_user.id), method: :delete %></li>
+            <% if current_user.admin %>
+            <li><%= link_to t('view.user_index'),admin_users_path %></li>
+              <% end %>
+                <% else %>
+                <li><%= link_to t('view.signup'), new_user_path %></li>
+                <li><%= link_to t('view.login'), new_session_path %></li>
+              <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
-
-    <% if logged_in? %>
-      <%= link_to t('view.profile'), user_path(current_user.id) %>
-      <%= link_to t('view.logout'), session_path(current_user.id), method: :delete %>
-          <% if current_user.admin %>
-          <%= link_to t('view.user_index'),admin_users_path %>
-          <% end %>
-    <% else %>
-      <%= link_to t('view.signup'), new_user_path %>
-      <%= link_to t('view.login'), new_session_path %>
     <% end %>
     <div class="container">
       <%= yield %>
     </div>
+
+    <footer class="footer">
+    <p>Copyright © 2019 Task Application Harinezumi.</p>
+  </footer>
 
 
 

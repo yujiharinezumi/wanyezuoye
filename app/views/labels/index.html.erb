@@ -1,0 +1,19 @@
+<h2>ラベル一覧</h2>
+
+  <table class="table table-bordered table-hover">
+    <tr class="active">
+      <th><%= t('view.label_name') %></th>
+      <th><%= t('view.destroy') %></th>
+    </tr>
+
+    <% @labels.each do |label| %>
+    <tr>
+      <td><%= label.name %></td>
+      <td><%= link_to t('view.destroy'), label_path(label.id), method: :delete ,data: { confirm: t('delete_task?') } %></td>
+    </tr>
+    <% end %>
+  </table>
+
+  <%= link_to t('view.new_task'), new_task_path, class:"btn btn-info" %>
+  <%= link_to t('view.index'), tasks_path, class:"btn btn-info" %>
+  <%= link_to t('view.label_create'), new_label_path, class:"btn btn-info" %>

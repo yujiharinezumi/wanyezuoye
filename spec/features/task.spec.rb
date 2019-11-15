@@ -3,25 +3,6 @@ require 'support/utilities'
 
 # このRSpec.featureの右側に、「タスク管理機能」のように、テスト項目の名称を書きます（do ~ endでグループ化されています）
 RSpec.feature "タスク管理機能", type: :feature do
-  # scenario（itのalias）の中に、確認したい各項目のテストの処理を書きます。
-  # let(:user_first) { FactoryBot.create(:user_first)}
-  # background do
-  #   @user = FactoryBot.create(:user)
-  #
-  #   @user = (:user_first)
-    # user_second = FactoryBot.create(:user_second)
-    # user_third = FactoryBot.create(:user_third)
-    # visit new_session_path
-    #
-    # fill_in "session_email",with: user.email
-    #
-    # fill_in "session_password",with: user.password
-    # # save_and_open_page
-    # click_button 'commit'
-
-  # end
-    # FactoryBot.create(:task)
-    # FactoryBot.create(:second_task)
   background do
     # FactoryBot.create(:task_first, user_id: user_first.id)
     # FactoryBot.create(:task_first, user_id: FactoryBot.create(:user_first).id)
@@ -30,10 +11,11 @@ RSpec.feature "タスク管理機能", type: :feature do
     # FactoryBot.create(:task_third, user_id: user_third.id )
     @user_1 = FactoryBot.create(:user_first)
     @user_2 = FactoryBot.create(:user_second)
+    @label_1 = FactoryBot.create(:label_first)
+    @label_2 = FactoryBot.create(:label_second)
     @task1 = FactoryBot.create(:task_first, user_id: @user_1.id)
     @task3 = FactoryBot.create(:task_third, user_id: @user_1.id)
     @task2 = FactoryBot.create(:task_second, user_id: @user_2.id)
-    # binding.pry
     # @task2 = FactoryBot.create(:task_second)
     # @task3 = FactoryBot.create(:task_third)
   end
@@ -126,8 +108,32 @@ RSpec.feature "タスク管理機能", type: :feature do
     visit tasks_path
     fill_in 'task_name',with: "task"
     select "未着手", from: 'task_status'
-    select "高", from: 'task_priority'
+    select "低", from: 'task_priority'
     click_on 'search'
-    expect(page).to have_text /.*未着手.*低.*/
+    expect(page).to have_text "未着手"
+    expect(page).to have_text "低"
+
+    save_and_open_page
   end
+
+  # scenario "ラベルで絞り込むテスト" do
+  #   log_in @user_1
+  #   visit tasks_path
+  #   visit new_task_path
+  #   fill_in "task[name]",with:"name"
+  #   fill_in "task[content]",with:"content"
+  #   fill_in "task[deadline]",with:"12"
+  #   # select "", from: 'task_status'
+  #   # select "", from: 'task_priority'
+  #   check 'task_label_ids_15'
+  #   click_on 'commit'
+  #   click_on 'search'
+  #   save_and_open_page
+  #
+  #
+  #
+  #
+  #
+  #
+  # end
 end

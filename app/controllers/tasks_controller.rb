@@ -3,10 +3,15 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show,:edit,:update,:destroy]
   before_action :authenticate_user
   def index
-      if params[:task].present?
-        @tasks = current_user.tasks.name_search(params[:task][:name]).status_search(params[:task][:status]).priority_search(params[:task][:priority]).page(params[:page]).per(PER)
-      elsif params[:sort_deadline]
-        @tasks = current_user.tasks.order(deadline: "ASC").page(params[:page]).per(PER)
+    @tasks = current_user.tasks.name_search(params.dig(:task, :name))
+                          .status_search(params.dig(:task, :status))
+                          .priority_search(params.dig(:task, :priority))
+                          .label_search(params.dig(:task, :labels_ids))
+                          .page(params[:page]).per(PER)
+      if  params[:sort_deadline]
+         @tasks = current_user.tasks.order(deadline: "ASC").page(params[:page]).per(PER)
+      elsif params[:sort_priority]
+        @tasks = current_user.tasks.order(priority: "DESC").page(params[:page]).per(PER)
       else
         @tasks = current_user.tasks.order(created_at: "DESC").page(params[:page]).per(PER)
       end
@@ -51,7 +56,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name,:content,:deadline,:status,:priority)
+    params.require(:task).permit(:name,:content,:deadline,:status,:priority, { label_ids: [] })
   end
 
   def set_task
