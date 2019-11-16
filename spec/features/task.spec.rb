@@ -59,7 +59,7 @@ RSpec.feature "タスク管理機能", type: :feature do
   scenario "終了期限順に並べるテスト" do
     log_in @user_1
     visit tasks_path
-    click_link '終了期限でソートする'
+    click_link '終了期限でソート'
     expect(page).to have_text /.*2019-10-28.*\n.*\n.*2019-10-30.*/
   end
 
