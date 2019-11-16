@@ -22,6 +22,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
+
   end
 
   def edit
@@ -61,5 +62,4 @@ class Admin::UsersController < ApplicationController
   def authenticate_admin
     redirect_to root_url unless current_user.admin?
   end
-
 end
