@@ -86,6 +86,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     check 'task_labels_ids_15'
     click_on 'search'
     expect(page).to have_text "work"
-    save_and_open_page
+    # save_and_open_page
   end
 end
