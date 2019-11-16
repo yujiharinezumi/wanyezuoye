@@ -7,6 +7,7 @@ PostgreSQL 11.5
 
 
 Model:Task
+
 |  Column    |    Type    |
 | ---------- | ---------- |
 |  id        |  integer   |
@@ -19,6 +20,7 @@ Model:Task
 
 
 Model:User
+
 |   Column         |       Type     |
 | -----------      | ------------   |
 |  id              |   integer      |
@@ -28,12 +30,14 @@ Model:User
 |  admin           |   boolean      |
 
 Model:Label
+
 |   Column         |       Type     |
 | -----------      | ------------   |
 |  id              |   integer      |
 |  name            |   string       |
 
 Model:Labeling
+
 |   Column         |       Type     |
 | -----------      | ------------   |
 |  id              |   integer      |
