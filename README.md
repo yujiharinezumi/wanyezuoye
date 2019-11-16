@@ -1,9 +1,9 @@
 # README
 
 開発環境
-ruby 2.6.5
-rails 5.2.3
-PostgreSQL 11.5
+- ruby 2.6.5
+- rails 5.2.3
+- PostgreSQL 11.5
 
 
 Model:Task
@@ -46,13 +46,15 @@ Model:Labeling
 
 
 ## Description
+
 deploy to github
-* git add .
-+ git commit -m 'message'
-- git push origin master
+* $ git add .
++ $ git commit -m 'message'
+- $ git push origin master
 
 
 deploy to heroku
-* heroku create
-+ heroku push origin master
-- heroku run rails db:migrate
+
+* $ heroku create
++ $ heroku push origin master
+- $ heroku run rails db:migrate
