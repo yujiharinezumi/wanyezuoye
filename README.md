@@ -1,5 +1,11 @@
 # README
 
+## content
+個人のタスクを管理するアプリです。
+終了期限や優先度で並び替え、絞り込み検索機能が付いてます。
+
+- アプリのURL https://calm-spire-00749.herokuapp.com/
+
 開発環境
 - ruby 2.6.5
 - rails 5.2.3
