@@ -23,6 +23,7 @@
   <%= form.submit t('view.search'),name:'search',class:"btn btn-info"%>
 <% end %>
 
+<div class="col-md-12">
 <table class="table table-bordered table-hover">
   <tr>
     <th><%= t('view.name') %></th>
@@ -56,14 +57,22 @@
     </td>
   </tr>
 <% end %>
-
-
 </table>
+</div>
 
  <%= paginate @tasks %>
-
+<div class="link col-md-2">
 <%= link_to t('view.new_post'),new_task_path,class:"btn btn-info" %>
+</div>
+<div class="link col-md-2">
 <%= link_to t('view.sort_deadline'), tasks_path(sort_deadline: "true"),class:"btn btn-info",id:"sort_deadline01" %>
+</div>
+<div class="link col-md-2">
 <%= link_to t('view.sort_priority'), tasks_path(sort_priority: "true"),class:"btn btn-info",id:"sort_deadline01" %>
+</div>
+<div class="link col-md-2">
 <%= link_to t('view.back_sort'), tasks_path,class:"btn btn-info" %>
+</div>
+<div class="link col-md-2">
 <%= link_to t('view.label_index'), labels_path,class:"btn btn-info" %>
+</div>

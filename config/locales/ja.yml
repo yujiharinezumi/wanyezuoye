@@ -226,8 +226,8 @@ ja:
     delete_task: タスクを削除する
     edit_task?: 本当に編集していいですか？
     delete_task?: 本当に削除していいですか？
-    new_post: 新しくタスクを投稿する
-    sort_deadline: 終了期限でソートする
+    new_post: 新規登録
+    sort_deadline: 終了期限でソート
     back_sort: 元に戻す
     index: タスク一覧
     have_error: 件のエラーがあります。
@@ -253,7 +253,7 @@ ja:
     label_name: ラベル名
     label_create: ラベルの登録
     label_index: ラベル一覧
-    sort_priority: 優先順位でソートする
+    sort_priority: 優先順位でソート
 
   enums:
     task:
