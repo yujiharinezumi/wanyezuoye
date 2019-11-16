@@ -1,0 +1,24 @@
+<h1><%=t('view.label_create') %></h1>
+<%= form_with(model: @label, local: true) do |form| %>
+  <% if @label.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @label.errors.count %><%=t('view.have/errors') %></h2>
+      <ul>
+
+      <% @label.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="label_name">
+    <%= form.label t('view.label_name') %>
+    <%= form.text_field :name %>
+  </div>
+  <br>
+  <%= form.submit %>
+<% end %>
+<br>
+  <%= link_to t('view.new_task'), new_task_path, class:"btn btn-info" %>
+  <%= link_to t('view.index'), tasks_path, class:"btn btn-info" %>
+  <%= link_to t('view.label_index'), labels_path, class:"btn btn-info" %>

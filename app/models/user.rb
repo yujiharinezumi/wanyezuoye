@@ -15,6 +15,14 @@ class User < ApplicationRecord
     throw(:abort)
     User.where(admin:true).count < 1
     # throw(:abort) if (tasks.user.admin < 1)
-      # errors.add :base,"admin0人まで削除することができません"
+    # errors.add :base,"admin0人まで削除することができません"
   end
+
+  def must_not_destroy_last_admin
+    throw(:abort)
+    User.where(admin:true).count < 1
+    # throw(:abort) if (tasks.user.admin < 1)
+    # errors.add :base,"admin0人まで削除することができません"
+  end
+
 end

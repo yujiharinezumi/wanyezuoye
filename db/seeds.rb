@@ -7,3 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(name:"yuji",email:"sugaya@gmail.com",password:"yujiyuji",password_confirmation:"yujiyuji",admin:true)
+
+Label.create([
+  {name: "仕事"},
+  {name: "勉強"},
+  {name: "家族"},
+  {name: "恋人"},
+  {name: "友達"},
+  {name: "遊び"},
+  {name: "旅行"},
+  {name: "その他"}
+])

@@ -5,18 +5,25 @@
 <%= form_with(model: Task.new,method: :get,local: true,url: tasks_path) do |form| %>
   <%= form.label :name_search, t('view.search_name') %>
   <%= form.text_field :name %>
- <%= form.label :status_serch, t('view.select_status') %>
- <%= form.select :status, Task.statuses_i18n.invert %>
+  <%= form.label :status_search, t('view.select_status') %>
+  <%= form.select :status, Task.statuses_i18n.invert, :include_blank => true %>
 
-<%= form.label :status_serch,t('view.select_priority') %>
-<%= form.select :priority, Task.priorities_i18n.invert%>
+  <%= form.label :priority_search,t('view.select_priority') %>
+  <%= form.select :priority, Task.priorities_i18n.invert,:include_blank => true %>
+<br>
+    <% Label.all.each do |label|%>
+     <div class="label_search">
+       <%= form.check_box :labels_ids, {multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false}, label[:id] %>
+       <label class="form-check-label"><%= label.name %></label>
+     </div>
+    <% end %>
 
-<%= form.hidden_field :search, value: 'true' %>
+  <%= form.hidden_field :search, value: 'true' %>
 
- <%= form.submit t('view.search'),name:'search',class:"btn btn-info"%>
+  <%= form.submit t('view.search'),name:'search',class:"btn btn-info"%>
 <% end %>
 
-
+<div class="col-md-12">
 <table class="table table-bordered table-hover">
   <tr>
     <th><%= t('view.name') %></th>
@@ -27,10 +34,11 @@
     <th><%= t('view.details') %></th>
     <th><%= t('view.edit') %></th>
     <th><%= t('view.destroy') %></th>
+    <th>ラベル</th>
   </tr>
 
 <% @tasks.each do |task| %>
-
+<!--  -->
   <tr>
     <div classs="task">
       <td id="name"><%= task.name %></td>
@@ -42,12 +50,29 @@
     <td><%= link_to t('view.check_details'), task_path(task.id) %></td>
     <td><%= link_to t('view.edit_task'), edit_task_path(task.id), data: { confirm: t('view.edit_task?') } %></td>
     <td><%= link_to t('view.delete_task'), task_path(task.id), method: :delete, data: { confirm: t('view.delete_task?') } %></td>
+    <td>
+    <% task.labels.each do |label| %>
+      <%= label.name %>
+    <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
+</div>
 
  <%= paginate @tasks %>
-
+<div class="link col-md-2">
 <%= link_to t('view.new_post'),new_task_path,class:"btn btn-info" %>
+</div>
+<div class="link col-md-2">
 <%= link_to t('view.sort_deadline'), tasks_path(sort_deadline: "true"),class:"btn btn-info",id:"sort_deadline01" %>
+</div>
+<div class="link col-md-2">
+<%= link_to t('view.sort_priority'), tasks_path(sort_priority: "true"),class:"btn btn-info",id:"sort_deadline01" %>
+</div>
+<div class="link col-md-2">
 <%= link_to t('view.back_sort'), tasks_path,class:"btn btn-info" %>
+</div>
+<div class="link col-md-2">
+<%= link_to t('view.label_index'), labels_path,class:"btn btn-info" %>
+</div>

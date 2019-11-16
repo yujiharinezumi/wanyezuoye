@@ -2,8 +2,6 @@
 
 <p><%= notice %></p>
 
-<%= link_to t('view.create_user'),new_admin_user_path %>
-
 <table class="table table-bordered table-hover">
   <tr>
     <th><%= t('view.name') %></th>
@@ -29,3 +27,6 @@
   </tr>
 <% end %>
 </table>
+<div class="create_user">
+  <%= link_to t('view.create_user'),new_admin_user_path,class:"btn btn-info"%>
+</div>
